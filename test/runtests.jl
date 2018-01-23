@@ -1,5 +1,7 @@
 using AnalyticalEngine
 using Base.Test
+using LossFunctions, PenaltyFunctions
 
-# write your own tests here
-@test 1 == 2
+const SEP{T, K} = PenaltyFunctions.ScaledElementPenalty{T, K}
+
+@testset "Types GLR" begin include("types_glr.jl") end
