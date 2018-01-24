@@ -10,14 +10,19 @@ using LearnBase
 using LossFunctions
 using PenaltyFunctions
 
-export fit, predict
+const SEP{T, K} = PenaltyFunctions.ScaledElementPenalty{T, K}
+
+import StatsBase.fit!
+
+export fit!, predict, SEP
 
 include("types.jl")
 
-## SUPERVISED
+## SUPERVISED MODELS
 
-include("supervised/generalized-linear-regression.jl") # generalized linear regression
-
+include("supervised/glr.jl")     # generalized linear regression
+include("supervised/glr_fit.jl")
+include("supervised/glr_predict.jl")
 
 
 end # AnalyticalEngine
