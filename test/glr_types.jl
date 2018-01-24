@@ -1,3 +1,5 @@
+include("_using.jl")
+
 glr = GeneralizedLinearRegression()
 ols = LinearRegression()
 ridge = RidgeRegression()
