@@ -9,6 +9,7 @@ struct UnimplementedException <: Exception end
 using LearnBase
 using LossFunctions
 using PenaltyFunctions
+using Flux.Tracker
 
 const SEP{T, K} = PenaltyFunctions.ScaledElementPenalty{T, K}
 
