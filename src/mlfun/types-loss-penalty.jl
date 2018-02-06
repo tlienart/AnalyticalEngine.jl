@@ -67,7 +67,7 @@ end
 
 +(pa::SAP, pb::SAP) = CompositePenalty([pa, pb])
 +(pc::CompositePenalty, pa::SAP) = CompositePenalty(vcat(pc.penalties, pa))
-+(pa::SAP, lc::CompositePenalty) = pc + pa
++(pa::SAP, pc::CompositePenalty) = pc + pa
 +(pca::CompositePenalty, pcb::CompositePenalty) =
     CompositePenalty(vcat(pca.penalties, pcb.penalties))
 
@@ -82,7 +82,7 @@ end
 *(c::Real, lc::CompositeLoss) = CompositeLoss(c * lc.losses)
 *(lc::CompositeLoss, c::Real) = CompositeLoss(lc.losses * c)
 
-*(c::Real, pc::CompositePenalty) = CompositePenalty(c * lc.penalties)
-*(lc::CompositePenalty, c::Real) = CompositePenalty(lc.penalties * c)
+*(c::Real, pc::CompositePenalty) = CompositePenalty(c * pc.penalties)
+*(pc::CompositePenalty, c::Real) = CompositePenalty(pc.penalties * c)
 
 /(comp::Union{CompositeLoss, CompositePenalty}, c::Real) = comp * (1/c)
