@@ -1,10 +1,10 @@
-include("_using.jl")
+using Base.Test
 
-@testset "Fit GLR" begin
+@testset "GLR-Fit" begin
 
-# ---------------
-## OLS REGRESSION (analytical)
-# ---------------
+#=
+OLS REGRESSION (analytical)
+=#
 
 ols = LinearRegression()
 ols_no_intercept = LinearRegression(fit_intercept=false)
@@ -32,18 +32,18 @@ fit!(ols_no_intercept, X, y)
 # ---------------
 ## OLS REGRESSION (FLUX)
 # ---------------
-
-function update!(params) # basic gradient descent scheme
-    for param in params
-        param.data .-= 0.1param.grad
-        param.grad .= 0
-    end
-    params
-end
-
-fit!(ols, X, y, solver="Flux", update! = update!, nsteps=30)
-
-@test norm(ols.coefficients - coefs) <= 0.05
+#
+# function update!(params) # basic gradient descent scheme
+#     for param in params
+#         param.data .-= 0.1param.grad
+#         param.grad .= 0
+#     end
+#     params
+# end
+#
+# fit!(ols, X, y, solver="Flux", update! = update!, nsteps=30)
+#
+# @test norm(ols.coefficients - coefs) <= 0.05
 
 # -----------------
 ## RIDGE REGRESSION
