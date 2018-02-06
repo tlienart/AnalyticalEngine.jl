@@ -14,40 +14,45 @@
 
 ## Data processing
 
-* [JuliaDB]()
-* [DataFrames]()
-* [CSV]()
+* [JuliaDB](https://github.com/JuliaComputing/JuliaDB.jl)
+* [DataFrames](https://github.com/JuliaData/DataFrames.jl)
+* [CSV](https://github.com/JuliaData/CSV.jl)
+
+### Datasets
+
+* [MLDataSets](https://github.com/JuliaML/MLDatasets.jl)
 
 ## Loss functions, penalties, metrics
 
-* [LossFunctions]()
-* [PenaltyFunctions]()
-* [MLMetrics]()
+_The current path is to re-implement a significant portion of it as it is a key element to defining an ML model. Of course large portions of the re-implemented version will be very close to existing implementations_
+
+* [LossFunctions](https://github.com/JuliaML/LossFunctions.jl)
+* [PenaltyFunctions](https://github.com/JuliaML/PenaltyFunctions.jl)
+* [MLMetrics](https://github.com/JuliaML/MLMetrics.jl)
 
 ## Regression
 
-* [Regression]()
-* [GLM]()
-* [SparseRegression]()
+* [Regression](https://github.com/lindahua/Regression.jl)
+* [GLM](https://github.com/JuliaStats/GLM.jl)
+* [SparseRegression](https://github.com/joshday/SparseRegression.jl)
 
 ## Classification
 
-* [SVM]()
-* [LIBSVM]()
-* [KSVM]()
-* [KNet]()
+* [SVM](https://github.com/JuliaStats/SVM.jl)
+* [LIBSVM](https://github.com/mpastell/LIBSVM.jl)
+* [KSVM](https://github.com/Evizero/KSVM.jl)
 
 ## Tree models
 
-* [DecisionTree]()
-* [XGBoost]()
-* [LightGBM]()
+* [DecisionTree](https://github.com/bensadeghi/DecisionTree.jl)
+* [XGBoost](https://github.com/dmlc/XGBoost.jl)
+* [LightGBM](https://github.com/Allardvm/LightGBM.jl)
 
 ## Optimisation
 
-* [Optim]()
+* [Optim](https://github.com/JuliaNLSolvers/Optim.jl)
 
 ## Differentiable programs
 
-* [Flux]
-* [KNet]
+* [Flux](https://github.com/FluxML/Flux.jl)
+* [KNet](https://github.com/denizyuret/Knet.jl)
