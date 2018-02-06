@@ -1,3 +1,4 @@
+using AnalyticalEngine
 using Base.Test
 
 @testset "GLR-Fit" begin
