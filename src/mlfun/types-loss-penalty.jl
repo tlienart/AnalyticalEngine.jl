@@ -12,12 +12,12 @@ abstract type ObjectiveFunction end
 # (x, y) -> L(x, y)
 abstract type Loss <: ObjectiveFunction end
 abstract type AtomicLoss <: Loss end
-struct ScaledLoss{AL} <: Loss where AL <: AtomicLoss
+mutable struct ScaledLoss{AL} <: Loss where AL <: AtomicLoss
     loss::AL
     scale::Real
 end
 const SAL = Union{AtomicLoss, ScaledLoss}
-struct CompositeLoss <: Loss
+mutable struct CompositeLoss <: Loss
     losses::Vector{SAL}
 end
 
@@ -32,12 +32,12 @@ end
 # θ -> P(θ)
 abstract type Penalty <: ObjectiveFunction end
 abstract type AtomicPenalty <: Penalty end
-struct ScaledPenalty{AP} <: Penalty where AP <: AtomicPenalty
+mutable struct ScaledPenalty{AP} <: Penalty where AP <: AtomicPenalty
     penalty::AP
     scale::Real
 end
 const SAP = Union{AtomicPenalty, ScaledPenalty}
-struct CompositePenalty <: Penalty
+mutable struct CompositePenalty <: Penalty
     penalties::Vector{SAP}
 end
 
