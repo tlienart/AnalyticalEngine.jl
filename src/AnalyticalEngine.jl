@@ -2,18 +2,6 @@ module AnalyticalEngine
 
 struct UnimplementedException <: Exception end
 
-## TODO evaluate whether necessary
-
-#using LearnBase
-#using LossFunctions
-#using PenaltyFunctions
-#using Flux.Tracker
-
-#const SEP{T, K} = PenaltyFunctions.ScaledElementPenalty{T, K}
-# export SEP
-
-import StatsBase.fit!
-
 export fit!, predict
 
 
