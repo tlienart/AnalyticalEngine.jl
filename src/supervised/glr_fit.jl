@@ -1,25 +1,26 @@
-function fit!(glr::GLR,
-    X::AbstractArray{T},
-    y::AbstractArray{T};
-    solver::String="default",
-    kwargs...) where T <: Real
+function fit!(glr::GLR, X::AbstractArray{S}, y::AbstractVector{T};
+    solver::String="default", kwargs...) where {S <: Real, T <: Real}
 
+    # retrieve the number of instances + features
     n, p = size(X)
-
     glr.n_features = p
-    if lowercase(solver) == "flux"
-        glr.coefficients = fit_flux(glr, X, y, n, p; kwargs...)
+    solver = lowercase(solver)
+
+    β = []
+    if solver == "flux"
+        β = fit_flux(glr, X, y, n, p; kwargs...)
     else
-        glr.coefficients = fit_(glr, X, y, n, p, lowercase(solver); kwargs...)
+        β = fit_(glr, X, y, n, p, solver; kwargs...)
     end
+    glr.intercept, glr.coefs = glr.fit_intercept ? (β[1], β[2:end]) : (0, β)
+    # return the fitted model
     glr
 end
 
 #=
 OLS  regression
 =#
-function fit_(
-    glr::GLR{LPDistLoss{2}, NoPenalty},
+function fit_(glr::GLR{LPDistLoss{2}, NoPenalty},
     X, y, n, p, solver;
     # arguments for FLUX
     update!::Function=(p->p), nsteps=10)
@@ -27,7 +28,7 @@ function fit_(
     if solver == "default"
         # XXX this is potentially very inefficient
         X_ = glr.fit_intercept ? hcat(ones(n), X) : X
-        X_ \ y
+        β = X_ \ y
     else
         throw(UnimplementedException())
     end
