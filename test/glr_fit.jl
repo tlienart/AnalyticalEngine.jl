@@ -18,7 +18,8 @@ X = randn(n, p)
 X_ = hcat(ones(n, 1), X)
 y = randn(n)
 
-coefs = X_\y
+β = X_\y
+intercept, coefs = β[1], β[2:end]
 coefs_noi = X\y
 
 fit!(ols, X, y)
@@ -27,8 +28,9 @@ fit!(ols_no_intercept, X, y)
 @test ols.n_features == p
 @test ols_no_intercept.n_features == p
 
-@test isapprox(ols.coefficients, coefs)
-@test isapprox(ols_no_intercept.coefficients, coefs_noi)
+@test isapprox(ols.intercept, intercept)
+@test isapprox(ols.coefs, coefs)
+@test isapprox(ols_no_intercept.coefs, coefs_noi)
 
 # ---------------
 ## OLS REGRESSION (FLUX)
@@ -44,7 +46,7 @@ fit!(ols_no_intercept, X, y)
 #
 # fit!(ols, X, y, solver="Flux", update! = update!, nsteps=30)
 #
-# @test norm(ols.coefficients - coefs) <= 0.05
+# @test norm(ols.coefs - coefs) <= 0.05
 
 # -----------------
 ## RIDGE REGRESSION
@@ -57,6 +59,6 @@ coefs_noi = (X' * X + λ * eye(p)) \ (X' * y)
 
 fit!(ridge, X, y)
 
-@test isapprox(ridge.coefficients, coefs_noi)
+@test isapprox(ridge.coefs, coefs_noi)
 
 end # testset
