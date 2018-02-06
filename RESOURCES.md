@@ -17,6 +17,9 @@
 * [JuliaDB](https://github.com/JuliaComputing/JuliaDB.jl)
 * [DataFrames](https://github.com/JuliaData/DataFrames.jl)
 * [CSV](https://github.com/JuliaData/CSV.jl)
+* [LabelUtils](https://github.com/JuliaML/MLLabelUtils.jl)
+* [Preprocessing](https://github.com/JuliaML/MLPreprocessing.jl)
+* [Transformations](https://github.com/JuliaML/Transformations.jl)
 
 ### Datasets
 
@@ -42,6 +45,11 @@ _The current path is to re-implement a significant portion of it as it is a key 
 * [LIBSVM](https://github.com/mpastell/LIBSVM.jl)
 * [KSVM](https://github.com/Evizero/KSVM.jl)
 
+## Meta
+
+* [Learning Strategies](https://github.com/JuliaML/LearningStrategies.jl)
+* [Iteration Managers](https://github.com/sglyon/IterationManagers.jl)
+
 ## Tree models
 
 * [DecisionTree](https://github.com/bensadeghi/DecisionTree.jl)
@@ -51,6 +59,8 @@ _The current path is to re-implement a significant portion of it as it is a key 
 ## Optimisation
 
 * [Optim](https://github.com/JuliaNLSolvers/Optim.jl)
+* [Stochastic Optim](https://github.com/JuliaML/StochasticOptimization.jl)
+* [Prox](https://github.com/JuliaML/Prox.jl)
 
 ## Differentiable programs
 
