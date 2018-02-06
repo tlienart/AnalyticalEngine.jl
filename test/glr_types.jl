@@ -1,6 +1,6 @@
-include("_using.jl")
+using Base.Test
 
-@testset "Types GLR" begin
+@testset "GLR-Types" begin
 
 glr = GeneralizedLinearRegression()
 ols = LinearRegression()
@@ -11,7 +11,7 @@ lasso = LassoRegression()
 @test isa(glr, GLR{LPDistLoss{2}, NoPenalty})
 
 @test isa(ols, GLR{LPDistLoss{2}, NoPenalty})
-@test isa(ridge, GLR{LPDistLoss{2}, SEP{T, L2Penalty}} where T<:Real)
-@test isa(lasso, GLR{LPDistLoss{2}, SEP{T, L1Penalty}} where T<:Real)
+@test isa(ridge, GLR{LPDistLoss{2}, ScaledPenalty{L2Penalty}})
+@test isa(lasso, GLR{LPDistLoss{2}, ScaledPenalty{L1Penalty}})
 
 end # testset

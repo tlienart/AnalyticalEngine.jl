@@ -12,7 +12,7 @@ export
     RidgeRegression,
     LogisticRegression
 
-doc"""
+"""
     GeneralizedLinearRegression{L<:Loss, P<:Penalty} <: RegressionModel
 
 Generalized Linear Regression (GLR) model with objective function:
@@ -54,7 +54,7 @@ function GeneralizedLinearRegression(;
 end
 
 
-doc"""
+"""
     LinearRegression
 
 Generalized Linear Regression model with objective function
@@ -69,7 +69,7 @@ function LinearRegression(;
 end
 
 
-doc"""
+"""
     RidgeRegression
 
 Generalized Linear Regression model with objective function
@@ -81,12 +81,12 @@ function RidgeRegression(
     fit_intercept::Bool=true)
 
     GeneralizedLinearRegression(
-        penalty=scaled(L2Penalty(), λ),
+        penalty=λ * L2Penalty(),
         fit_intercept=fit_intercept)
 end
 
 
-doc"""
+"""
     LassoRegression
 
 Generalized Linear Regression model with objective function
@@ -98,6 +98,6 @@ function LassoRegression(
     fit_intercept::Bool=true)
 
     GeneralizedLinearRegression(
-        penalty=scaled(L1Penalty(), λ),
+        penalty=λ * L1Penalty(),
         fit_intercept=fit_intercept)
 end
