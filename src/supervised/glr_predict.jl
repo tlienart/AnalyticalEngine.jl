@@ -1,9 +1,10 @@
-function predict(glr::GLR, X::AbstractMatrix{T}) where T<:Real
+function predict(glr::GLR, X::AbstractArray{T}) where T<:Real
 
-    n = size(X, 1)
+    p = size(X, 2)
+    @assert p == glr.n_features "Dimension mismatch"
 
     if glr.fit_intercept
-        X * glr.coefficients[2:end] .+ glr.coefficients[1] * ones(T, n)
+        X * glr.coefs .+ glr.intercept
     else
         X * glr.coefs
     end
