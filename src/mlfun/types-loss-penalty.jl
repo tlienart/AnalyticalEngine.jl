@@ -46,7 +46,7 @@ end
 
 *(c::Real, ap::AtomicPenalty) = ScaledPenalty(ap, c)
 *(ap::AtomicPenalty, c::Real) = c * ap
-*(c::Real, sp::ScaledPenalty) = ScaledPenalty(sp.loss, sp.scale * c)
+*(c::Real, sp::ScaledPenalty) = ScaledPenalty(sp.penalty, sp.scale * c)
 *(sp::ScaledPenalty, c::Real) = c * sp
 
 # =====================================
