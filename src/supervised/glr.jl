@@ -1,8 +1,13 @@
 #=
-Generalized Linear Regression (GLR) models with objective function:
+GENERALIZED LINEAR REGRESSION (GLR) models
+
+These are models with objective function:
 
     Loss(y, f(Xθ)) + λ Penalty(θ)
 
+where y is a (n,) vector, X an (n, p) matrix, θ a (p, ) vector. Loss(y, ŷ)
+is a function that measures the loss for a precited ŷ and Penalty(θ) is a
+penalty on the candidate coefficient vector θ.
 =#
 
 export
@@ -11,13 +16,12 @@ export
     LassoRegression,
     RidgeRegression,
     LogisticRegression
-    
+
 
 """
     GeneralizedLinearRegression{L<:Loss, P<:Penalty} <: RegressionModel
 
 Generalized Linear Regression (GLR) model with objective function:
-
 
 ``L(y, f(Xθ)) + λ P(θ)``
 
@@ -35,12 +39,12 @@ mutable struct GeneralizedLinearRegression{L<:Loss, P<:Penalty} <: RegressionMod
     penalty::P  # R(θ) contains the scaling
     fit_intercept::Bool
     n_features::Int
-    coefficients::AbstractVector{Real}
+    intercept::Real
+    coefs::AbstractVector{Real}
 end
 
 # short alias
 const GLR{L, P} = GeneralizedLinearRegression{L, P}
-
 
 function GeneralizedLinearRegression(;
     loss=L2DistLoss(),
@@ -52,6 +56,7 @@ function GeneralizedLinearRegression(;
         penalty,
         fit_intercept,
         zero(Int64),       # un-assigned number of features
+        zero(Real),        # un-assigned intercept
         zeros(Real, 0))    # un-assigned coefficients
 end
 
@@ -63,12 +68,8 @@ Generalized Linear Regression model with objective function
 
 ``|y-Xθ|_2``
 """
-function LinearRegression(;
-    fit_intercept::Bool=true)
-
-    GeneralizedLinearRegression(
-        fit_intercept=fit_intercept)
-end
+LinearRegression(; fit_intercept::Bool=true) =
+    GeneralizedLinearRegression(fit_intercept=fit_intercept)
 
 
 """
@@ -78,14 +79,9 @@ Generalized Linear Regression model with objective function
 
 ``|y-Xθ|_2 + λ|θ|_2``
 """
-function RidgeRegression(
-    λ::Real=1.0;
-    fit_intercept::Bool=true)
-
+RidgeRegression(λ::Real=1.0; fit_intercept::Bool=true) =
     GeneralizedLinearRegression(
-        penalty=λ * L2Penalty(),
-        fit_intercept=fit_intercept)
-end
+        penalty=λ * L2Penalty(), fit_intercept=fit_intercept)
 
 
 """
@@ -95,11 +91,6 @@ Generalized Linear Regression model with objective function
 
 ``|y - Xθ|_2 + λ|θ|_1``
 """
-function LassoRegression(
-    λ::Real=1.0;
-    fit_intercept::Bool=true)
-
+LassoRegression(λ::Real=1.0; fit_intercept::Bool=true) =
     GeneralizedLinearRegression(
-        penalty=λ * L1Penalty(),
-        fit_intercept=fit_intercept)
-end
+        penalty=λ * L1Penalty(), fit_intercept=fit_intercept)
