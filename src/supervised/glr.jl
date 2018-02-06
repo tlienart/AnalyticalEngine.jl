@@ -11,13 +11,15 @@ export
     LassoRegression,
     RidgeRegression,
     LogisticRegression
+    
 
 """
     GeneralizedLinearRegression{L<:Loss, P<:Penalty} <: RegressionModel
 
 Generalized Linear Regression (GLR) model with objective function:
 
-``L(y, f(X\theta)) + \lambda P(\theta)``
+
+``L(y, f(Xθ)) + λ P(θ)``
 
 where ``L`` is a loss function, ``P`` a penalty and ``f`` is a function.
 
@@ -59,7 +61,7 @@ end
 
 Generalized Linear Regression model with objective function
 
-``\|y-X\theta\|_2``
+``|y-Xθ|_2``
 """
 function LinearRegression(;
     fit_intercept::Bool=true)
@@ -74,7 +76,7 @@ end
 
 Generalized Linear Regression model with objective function
 
-``\|y-X\theta\|_2 + λ\|\theta\|_2``
+``|y-Xθ|_2 + λ|θ|_2``
 """
 function RidgeRegression(
     λ::Real=1.0;
@@ -91,7 +93,7 @@ end
 
 Generalized Linear Regression model with objective function
 
-``\|y - X\theta\|_2 + \lambda\|\theta\|_1``
+``|y - Xθ|_2 + λ|θ|_1``
 """
 function LassoRegression(
     λ::Real=1.0;
