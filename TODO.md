@@ -7,6 +7,15 @@ Feel free to add points, please add a TAG to indicate how hard it is + how urgen
 
 * This package will draw from everywhere so probably good to have a decent way of listing packages that this package relies on + how to deal with the license.
 
+## Meta Learning and Hyperparam tuning
+
+* (**high priority, hard**) Think about how to construct meta learners in a way that is clean and easy and whether that forces early design choices. Same with hyperparameter tuning (especially with a model like a pipeline)
+  - think about pipelines, autotuning etc and how that would work
+  - have a look at sklearn code for pipeline
+  - usecase1: `tuningof(variableselectionof(baselearner,varctrl),tunectrl)`
+  - usecase2: `pipeline(preproc, trafo, baselearner)`
+  - usecase3: `stack([learner1,learner2,learner3], lasso)` 
+
 ## Generalized Linear Regression
 
 ### Flux fitting
