@@ -4,6 +4,14 @@
 
 [![codecov.io](http://codecov.io/github/tlienart/AnalyticalEngine.jl/coverage.svg?branch=master)](http://codecov.io/github/tlienart/AnalyticalEngine.jl?branch=master)
 
+## Who's behind this
+
+* Thibaut Lienart (Imperial College London)
+* Sebastian Vollmer (University of Warwick, Alan Turing Institute)
+* Mike Innes (Julia Computing)
+* Avik Sengupta (Julia Computing)
+* Franz Kiraly (University College London)
+
 ## Aims and Milestones
 
 ### Milestones
