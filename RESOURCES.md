@@ -15,6 +15,7 @@
 ## Data processing
 
 * [JuliaDB](https://github.com/JuliaComputing/JuliaDB.jl)
+    - [Tutorial on JuliaDB](https://github.com/piever/JuliaDBTutorial/blob/master/hflights.ipynb)
 * [DataFrames](https://github.com/JuliaData/DataFrames.jl)
 * [CSV](https://github.com/JuliaData/CSV.jl)
 * [LabelUtils](https://github.com/JuliaML/MLLabelUtils.jl)
