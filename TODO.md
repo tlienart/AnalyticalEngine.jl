@@ -21,3 +21,9 @@ Feel free to add points, please add a TAG to indicate how hard it is + how urgen
 ### Lasso
 
 * (**high priority, medium**) Implement a FISTA backend (either that or look up what they do in SparseRegression and copy that)
+
+## API thinking
+
+### Ensemble Learning / Meta Learning
+
+* (**medium priority, hard**) Think about how the API for meta-learners would work efficiently (parallel etc) this should be done with @fkiraly
