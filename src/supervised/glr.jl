@@ -6,7 +6,7 @@ These are models with objective function:
     Loss(y, f(Xθ)) + λ Penalty(θ)
 
 where y is a (n,) vector, X an (n, p) matrix, θ a (p, ) vector. Loss(y, ŷ)
-is a function that measures the loss for a precited ŷ and Penalty(θ) is a
+is a function that measures the loss for a predicted ŷ and Penalty(θ) is a
 penalty on the candidate coefficient vector θ.
 =#
 
