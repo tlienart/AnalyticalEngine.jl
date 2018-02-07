@@ -20,5 +20,7 @@ include("supervised/glr.jl")     # generalized linear regression
 include("supervised/glr_fit.jl")
 include("supervised/glr_predict.jl")
 
+include("meta.jl")
+
 
 end # AnalyticalEngine
