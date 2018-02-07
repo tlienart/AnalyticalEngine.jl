@@ -9,6 +9,10 @@ Feel free to add points, please add a TAG to indicate how hard it is + how urgen
 
 ## Generalized Linear Regression
 
+### Flux fitting
+
+* (**high priority, medium**) Check Flux example for fitting Linear Regression, mimick it. Check with @mike that the gradient is computing in most efficient way or whether would be more efficient to have analytical gradient (e.g. of p-norm)
+
 ### Ridge
 
 * (**low priority, easy**) Allow for element-wise penalty, will change to `X'X+Diagonal(λ)`
