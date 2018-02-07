@@ -1,6 +1,6 @@
 The AnalyticalEngine.jl package is licensed under the MIT "Expat" License:
 
-> Copyright (c) 2018: tlienart.
+> Copyright (c) 2018: Thibaut Lienart, Mike Innes, Sebastian Vollmer, Franz Kiraly, Avik Sengupta, Alex Bird
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
