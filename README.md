@@ -13,6 +13,7 @@
   - have a basic pipeline `JuliaDB -> AnalyticalEngine`
   - have an interface with `DecisionTree.jl`
 * August 2018
+  - have a full pipeline `JuliaDB -> FeatEng -> AnalyticalEngine`
   - have a working framework for metalearning
   - have working tools for hyperparameter tuning (BayesianOpt, K-Folds, ...)
 

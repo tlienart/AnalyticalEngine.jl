@@ -66,7 +66,7 @@ end
 
 Generalized Linear Regression model with objective function
 
-``|y-Xθ|_2``
+``|y-Xθ|₂``
 """
 LinearRegression(; fit_intercept::Bool=true) =
     GeneralizedLinearRegression(fit_intercept=fit_intercept)
@@ -77,7 +77,7 @@ LinearRegression(; fit_intercept::Bool=true) =
 
 Generalized Linear Regression model with objective function
 
-``|y-Xθ|_2 + λ|θ|_2``
+``|y-Xθ|₂ + λ|θ|₂``
 """
 RidgeRegression(λ::Real=1.0; fit_intercept::Bool=true) =
     GeneralizedLinearRegression(
@@ -89,7 +89,7 @@ RidgeRegression(λ::Real=1.0; fit_intercept::Bool=true) =
 
 Generalized Linear Regression model with objective function
 
-``|y - Xθ|_2 + λ|θ|_1``
+``|y - Xθ|₂ + λ|θ|₁``
 """
 LassoRegression(λ::Real=1.0; fit_intercept::Bool=true) =
     GeneralizedLinearRegression(
