@@ -11,6 +11,7 @@
 * Mike Innes (Julia Computing)
 * Avik Sengupta (Julia Computing)
 * Franz Kiraly (University College London)
+* Valentin Churavy (Massachusetts Institute of Technology)
 
 ## Aims and Milestones
 
