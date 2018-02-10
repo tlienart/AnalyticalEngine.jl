@@ -17,7 +17,7 @@
 ### Milestones
 
 * March 2018
-  - have a basic `GeneralizedLinearRegression` that works well and showcases the ideas + works with Flux
+  - [**working prototype**] have a basic `GeneralizedLinearRegression` that works well and showcases the ideas + works with Flux
   - have a basic pipeline `JuliaDB -> AnalyticalEngine`
   - have an interface with `DecisionTree.jl`
 * August 2018
