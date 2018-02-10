@@ -21,9 +21,7 @@ end
 OLS  regression
 =#
 function fit_(glr::GLR{LPDistLoss{2}, NoPenalty},
-    X, y, n, p, solver;
-    # arguments for FLUX
-    update!::Function=(p->p), nsteps=10)
+    X, y, n, p, solver)
 
     if solver ∈ ["default", "analytical"]
         # XXX this is potentially very inefficient
