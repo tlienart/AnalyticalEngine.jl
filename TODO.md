@@ -3,6 +3,8 @@
 This is an un-curated list of things that should be done.
 Feel free to add points, please add a TAG to indicate how hard it is + how urgent it is.
 
+**Brainstorm**: [hackmd](https://hackmd.io/JwQ2CMDYGZwBgLQHY4FMBMCAsBjcWF8ATJBAVmAEYyAOSgMwskriA===#)
+
 ## General organisation
 
 * This package will draw from everywhere so probably good to have a decent way of listing packages that this package relies on + how to deal with the license.
