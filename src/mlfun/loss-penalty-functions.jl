@@ -1,8 +1,11 @@
 export
+    # Loss / Penalty types
     NoLoss, NoPenalty,
     LPDistLoss, LPPenalty,
     L1DistLoss, L1Penalty,
-    L2DistLoss, L2Penalty
+    L2DistLoss, L2Penalty,
+    # Utilities
+    isdifferentiable, getp
 
 # ============================
 ## None based loss and penalty
@@ -11,35 +14,43 @@ export
     NoLoss <: AtomicLoss
 """
 struct NoLoss <: AtomicLoss end
-(l::NoLoss)(x, y) = 0
 
 """
     NoPenalty <: AtomicPenalty
 """
 struct NoPenalty <: AtomicPenalty end
+
+## Useful shortcut
+
+const NoCost = Union{NoLoss, NoPenalty}
+
+(l::NoLoss)(x, y) = 0
 (p::NoPenalty)(θ) = 0
+
+isdifferentiable(nc::NoCost) = true
 
 # ====================================
 ## LP-based loss and penalty functions
 # ====================================
-
 """
-    LPDistLoss{P} <: AtomicLoss
+    LPDistLoss{p} <: AtomicLoss
 """
-struct LPDistLoss{P} <: AtomicLoss where P <: Real end
-
-(l::LPDistLoss)(x, y) = norm(x .- y, getp(l))
+struct LPDistLoss{p} <: AtomicLoss where p <: Real end
 
 """
     LPPenalty{P} <: AtomicPenalty
 """
-struct LPPenalty{P} <: AtomicPenalty where P <: Real end
+struct LPPenalty{p} <: AtomicPenalty where p <: Real end
 
-(p::LPPenalty)(θ) = norm(θ, getp(p))
-
-## Shortcuts
+## Useful Shortcuts
 
 const L1DistLoss = LPDistLoss{1}
 const L1Penalty = LPPenalty{1}
 const L2DistLoss = LPDistLoss{2}
 const L2Penalty = LPPenalty{2}
+const LPCost{p} = Union{LPDistLoss{p}, LPPenalty{p}}
+
+(l::LPDistLoss)(x, y) = lp(x .- y, getp(l))
+(p::LPPenalty)(θ) = lp(θ, getp(p))
+
+isdifferentiable(lpc::LPCost{P}) where P = (P>1)

@@ -9,3 +9,4 @@ function predict(glr::GLR, X::AbstractArray{T}) where T<:Real
         X * glr.coefs
     end
 end
+(glr::GLR)(X) = predict(glr, X) 

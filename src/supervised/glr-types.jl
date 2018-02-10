@@ -41,6 +41,8 @@ mutable struct GeneralizedLinearRegression{L<:Loss, P<:Penalty} <: RegressionMod
     n_features::Int
     intercept::Real
     coefs::AbstractVector{Real}
+    avgloss::Bool    # whether to compute the mean loss (def=true)
+    avgpenalty::Bool # whether to compute the mean penalty (def=false)
 end
 
 # short alias
@@ -57,9 +59,10 @@ function GeneralizedLinearRegression(;
         fit_intercept,
         zero(Int64),       # un-assigned number of features
         zero(Real),        # un-assigned intercept
-        zeros(Real, 0))    # un-assigned coefficients
+        zeros(Real, 0),    # un-assigned coefficients
+        true,              # average the loss by number of data points
+        false)             # average the penalty by dimension
 end
-
 
 """
     LinearRegression
