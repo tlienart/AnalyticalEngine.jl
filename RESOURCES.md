@@ -52,6 +52,7 @@ _The current path is to re-implement a significant portion of it as it is a key 
 * [Iteration Managers](https://github.com/sglyon/IterationManagers.jl)
 * [Gaussian processes](https://github.com/cstjean/ScikitLearn.jl/blob/master/examples/Gaussian_Processes_Julia.ipynb)
 * [MLBase](https://github.com/JuliaStats/MLBase.jl)
+* [Bags of little bootstrap](https://gist.github.com/jiahao/7033758)
 
 ## Tree models
 

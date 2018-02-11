@@ -41,4 +41,5 @@
 
 * [MLR in R](https://github.com/mlr-org/mlr) 
 * [Sklearn in Python](https://github.com/scikit-learn/scikit-learn) as well as [contributions](https://github.com/scikit-learn-contrib) such as [sklearn pandas](https://github.com/scikit-learn-contrib/sklearn-pandas) and [lightning](https://github.com/scikit-learn-contrib/lightning)
-* [Sklearn in Julia](https://github.com/cstjean/ScikitLearn.jl) 
+* [Sklearn in Julia](https://github.com/cstjean/ScikitLearn.jl)
+* Caret
