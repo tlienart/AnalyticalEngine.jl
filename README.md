@@ -36,3 +36,8 @@
   - offer extensible meta-learning
   - offer modern and extensible hyperparameter tuning (such as Bayesian opt)
   - be extended easily by researchers/users in such a way that the maths matches well with the code
+
+### Inspiration
+
+* [MLR in R](https://github.com/mlr-org/mlr) 
+* [Sklearn in Python](https://github.com/scikit-learn/scikit-learn) as well as [contributions](https://github.com/scikit-learn-contrib) such as [sklearn pandas](https://github.com/scikit-learn-contrib/sklearn-pandas) and [lightning](https://github.com/scikit-learn-contrib/lightning)
