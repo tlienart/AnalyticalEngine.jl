@@ -7,10 +7,10 @@
 ## Who's behind this
 
 * Thibaut Lienart (Imperial College London)
-* Sebastian Vollmer (University of Warwick, Alan Turing Institute)
 * Mike Innes (Julia Computing)
-* Avik Sengupta (Julia Computing)
+* Sebastian Vollmer (University of Warwick, Alan Turing Institute)
 * Franz Kiraly (University College London)
+* Avik Sengupta (Julia Computing)
 * Valentin Churavy (Massachusetts Institute of Technology)
 
 ## Aims and Milestones
@@ -18,8 +18,8 @@
 ### Milestones
 
 * March 2018
-  - [**working prototype**] have a basic `GeneralizedLinearRegression` that works well and showcases the ideas + works with Flux
-  - have a basic pipeline `JuliaDB -> AnalyticalEngine`
+  - [**working prototype**] ~~have a basic `GeneralizedLinearRegression` that works well and showcases the ideas + works with Flux~~
+  - [**WIP**] have a basic pipeline `JuliaDB -> AnalyticalEngine`
   - have an interface with `DecisionTree.jl`
 * August 2018
   - have a full pipeline `JuliaDB -> FeatEng -> AnalyticalEngine`
