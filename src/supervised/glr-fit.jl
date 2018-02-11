@@ -1,3 +1,8 @@
+"""
+    fit!(glr::GLR, X::AbstractArray{S}, y::AbstractVector{T}, ...)
+
+Parent call to fit a `GeneralizedLinearRegression` model.
+"""
 function fit!(glr::GLR, X::AbstractArray{S}, y::AbstractVector{T};
     solver::String="default", kwargs...) where {S <: Real, T <: Real}
 
@@ -7,8 +12,10 @@ function fit!(glr::GLR, X::AbstractArray{S}, y::AbstractVector{T};
     solver = lowercase(solver)
 
     if solver == "flux"
+        # generic solver for differentiable programs
         β = fit_flux(glr, X, y, n, p; kwargs...)
     else
+        # specific solvers for different sub-cases
         β = fit_(glr, X, y, n, p, solver; kwargs...)
     end
 
@@ -47,7 +54,6 @@ function fit_(glr::GLR{LPDistLoss{2}, ScaledPenalty{L2Penalty}},
         # n and p into account which all amounts to changing λ
         σ_gap = glr.penalty.scale
         σ_gap *= (glr.avgloss ? n : 1)
-        σ_gap /= (glr.avgpenalty ? p : 1)
         β = (X_' * X_ + σ_gap * eye(p_)) \ (X_' * y)
     else
         throw(UnimplementedException())
@@ -63,7 +69,7 @@ NOTE will only work if things are differentiable and there it may be better to
 just use analytical gradients (e.g.: logit).
 =#
 function fit_flux(glr, X, y, n, p;
-    grad_step::Union{Void, Function}=nothing, nsteps=10, showloss=false)
+    grad_step::Union{Void, Function}=nothing, nsteps=10, showscore=false)
 
     @assert typeof(grad_step) != Void "You need to specify an update mechanism"
 
@@ -72,17 +78,16 @@ function fit_flux(glr, X, y, n, p;
 
     params = glr.fit_intercept ? (b, θ) : (θ, )
 
-    scale_l = glr.avgloss ? n : 1
-    scale_p = glr.avgpenalty ? p : 1
+    scale_loss = (glr.avgloss ? length(y) : 1)
 
     predict(X) = glr.fit_intercept ? (X * θ .+ b) : (X * θ)
-    objfun(X, y) = glr.loss(predict(X), y)/scale_l + glr.penalty(θ)/scale_p
+    score(X, y) = glr.loss(predict(X), y) / scale_loss + glr.penalty(θ)
 
     for i = 1:nsteps
-        back!(objfun(X, y))
+        back!(score(X, y))
         params = grad_step(params, i)
-        if showloss
-            @show objfun(X, y)
+        if showscore
+            @show score(X, y)
         end
     end
 
