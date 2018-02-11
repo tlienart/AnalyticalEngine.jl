@@ -65,6 +65,10 @@ _The current path is to re-implement a significant portion of it as it is a key 
 * [Stochastic Optim](https://github.com/JuliaML/StochasticOptimization.jl)
 * [Prox](https://github.com/JuliaML/Prox.jl)
 
+### Specific solvers that can be looked into
+
+* [Liblinear](https://github.com/cjlin1/liblinear) used by sklearn
+
 ## Differentiable programs
 
 * [Flux](https://github.com/FluxML/Flux.jl)
