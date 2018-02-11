@@ -9,7 +9,7 @@ back(::typeof(logsigmoid), Δ, xs) = @back(xs, ∇logsigmoid(Δ, data(xs)))
 
 # -----------------------------------------------------------------------------
 
-export fit!, predict
+export fit!, predict, score
 
 struct UnimplementedException <: Exception end
 
@@ -23,9 +23,13 @@ include("mlfun/loss-penalty-utils.jl")
 
 ## SUPERVISED MODELS
 
-include("supervised/glr-types.jl")     # generalized linear regression
+#### generalized linear regression
+
+include("supervised/glr-types.jl")
+include("supervised/glr-utils.jl")
 include("supervised/glr-fit.jl")
 include("supervised/glr-predict.jl")
+
 
 
 end # AnalyticalEngine

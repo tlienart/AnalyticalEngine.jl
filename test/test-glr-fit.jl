@@ -63,12 +63,14 @@ RIDGE REGRESSION
 
 λ = 2.0
 ridge = RidgeRegression(λ, fit_intercept=false)
-σ_gap = λ * n # avgloss, not avgpenalty
+σ_gap = λ * n # |y-Xθ|/n + λ|θ| or |y-Xθ| + nλ|θ|
 ridge_coefs_noi = (X' * X + σ_gap * eye(p)) \ (X' * y)
 
 fit!(ridge, X, y)
 
 @test isapprox(ridge.coefs, ridge_coefs_noi)
+
+@test score(ridge, X, y) ≈ sum(abs2.(X * ridge_coefs_noi .- y)) / n + λ * sum(abs2.(ridge_coefs_noi))
 
 ridge_flux = RidgeRegression(λ, fit_intercept=false)
 

@@ -4,9 +4,10 @@ using Base.Test
 @testset "Loss+Penalty" begin
 
 srand(123)
-x = randn(5)
-y = randn(5)
-θ = randn(5)
+n, p = 7, 5
+x = randn(n)
+y = randn(n)
+θ = randn(p)
 
 δ = x .- y
 δ1 = norm(δ, 1)

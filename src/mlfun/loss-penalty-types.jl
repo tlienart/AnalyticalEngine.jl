@@ -1,8 +1,7 @@
 export ObjectiveFunction,
     AtomicLoss, AtomicPenalty,
     ScaledLoss, ScaledPenalty,
-    CompositeLoss, CompositePenalty,
-    value
+    CompositeLoss, CompositePenalty
 
 import Base.+, Base.-, Base.*, Base./
 
