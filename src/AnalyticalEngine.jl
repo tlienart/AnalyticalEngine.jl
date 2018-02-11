@@ -1,13 +1,25 @@
 module AnalyticalEngine
 
-using Flux.Tracker # Needs version > 0.4.1 (for norm)
-using NNlib
+using Flux.Tracker
+#= ----------------------------------------------------------------------------
+Things that should really be defined by either Flux.Tracker or NNLib and that
+possibly are but not in tagged-versions and therefore currently not accessible.
+=#
+# from NNLib -- sigmoid and log sigmoid
+sigmoid(x) = one(x) / (one(x) + exp(-x))
+function logsigmoid(x)
+  max_v = max(zero(x), -x)
+  z = exp(-max_v) + exp(-x-max_v)
+  -(max_v + log(z))
+end
+∇logsigmoid(Δ, x) = Δ * (1 - sigmoid(x))
+
+# Extending Flux.Tracker
 import Flux.Tracker: @back
+logsigmoid(xs::TrackedArray) = track(logsigmoid, xs)
+back(::typeof(logsigmoid), Δ, xs) = @back(xs, ∇logsigmoid(Δ, data(xs)))
 
-logsigmoid(xs::TrackedArray) = track(NNLib.logsigmoid, xs)
-
-back(::typeof(logsigmoid), Δ, xs) = @back(xs, NNLib.∇logsigmoid(Δ, data(xs)))
-
+# -----------------------------------------------------------------------------
 
 export fit!, predict
 

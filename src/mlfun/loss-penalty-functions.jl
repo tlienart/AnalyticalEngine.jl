@@ -61,4 +61,4 @@ isdifferentiable(lpc::LPCost{P}) where P = (P>1)
 """
 struct LogisticLoss <: AtomicLoss end
 
-(::LogisticLoss)(x, y) = -sum(NNlib.logsigmoid, x .* y)
+(::LogisticLoss)(x, y) = -sum(logsigmoid, x .* y)
