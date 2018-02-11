@@ -51,7 +51,9 @@ const GLR{L, P} = GeneralizedLinearRegression{L, P}
 function GeneralizedLinearRegression(;
     loss=L2DistLoss(),
     penalty=NoPenalty(),
-    fit_intercept=true)
+    fit_intercept=true,
+    avgloss::Bool=true,
+    avgpenalty::Bool=false)
 
     GeneralizedLinearRegression(
         loss,
@@ -60,8 +62,8 @@ function GeneralizedLinearRegression(;
         zero(Int64),       # un-assigned number of features
         zero(Real),        # un-assigned intercept
         zeros(Real, 0),    # un-assigned coefficients
-        true,              # average the loss by number of data points
-        false)             # average the penalty by dimension
+        avgloss,           # average the loss by number of data points
+        avgpenalty)        # average the penalty by dimension
 end
 
 """
@@ -71,8 +73,13 @@ Generalized Linear Regression model with objective function
 
 ``|y-Xθ|₂``
 """
-LinearRegression(; fit_intercept::Bool=true) =
-    GeneralizedLinearRegression(fit_intercept=fit_intercept)
+function LinearRegression(;
+    fit_intercept::Bool=true,
+    avgloss::Bool=true)
+
+    GeneralizedLinearRegression(
+        fit_intercept=fit_intercept)
+end
 
 
 """
@@ -82,9 +89,17 @@ Generalized Linear Regression model with objective function
 
 ``|y-Xθ|₂ + λ|θ|₂``
 """
-RidgeRegression(λ::Real=1.0; fit_intercept::Bool=true) =
+function RidgeRegression(λ::Real=1.0;
+    fit_intercept::Bool=true,
+    avgloss::Bool=true,
+    avgpenalty::Bool=false)
+
     GeneralizedLinearRegression(
-        penalty=λ * L2Penalty(), fit_intercept=fit_intercept)
+        penalty=λ * L2Penalty(),
+        fit_intercept=fit_intercept,
+        avgloss=avgloss,
+        avgpenalty=avgpenalty)
+end
 
 
 """
@@ -94,6 +109,33 @@ Generalized Linear Regression model with objective function
 
 ``|y - Xθ|₂ + λ|θ|₁``
 """
-LassoRegression(λ::Real=1.0; fit_intercept::Bool=true) =
+function LassoRegression(λ::Real=1.0;
+    fit_intercept::Bool=true,
+    avgloss::Bool=true,
+    avgpenalty::Bool=false)
+
     GeneralizedLinearRegression(
-        penalty=λ * L1Penalty(), fit_intercept=fit_intercept)
+        penalty=λ * L1Penalty(),
+        fit_intercept=fit_intercept,
+        avgloss=avgloss,
+        avgpenalty=avgpenalty)
+end
+
+
+"""
+    LogisticRegression
+"""
+function LogisticRegression(λ::Real=1.0;
+    loss=LogisticLoss(),
+    penalty::Union{NoPenalty, L1Penalty, L2Penalty}=L2Penalty(),
+    fit_intercept::Bool=true,
+    avgloss::Bool=false,   # false by default
+    avgpenalty::Bool=false)
+
+    GeneralizedLinearRegression(
+        loss=loss,
+        penalty=λ * penalty,
+        fit_intercept=fit_intercept,
+        avgloss=avgloss,
+        avgpenalty=avgpenalty)
+end

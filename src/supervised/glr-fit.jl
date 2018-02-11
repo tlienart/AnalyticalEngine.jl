@@ -80,6 +80,7 @@ function fit_flux(glr, X, y, n, p;
 
     for i = 1:nsteps
         back!(objfun(X, y))
+        @show objfun(X, y)
         params = grad_step(params, i)
     end
 

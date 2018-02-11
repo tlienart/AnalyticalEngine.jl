@@ -1,8 +1,8 @@
 using AnalyticalEngine
 using Base.Test
 
-include("glr_types.jl")
-include("glr_predict.jl")
-include("glr_fit.jl")
+include("test-glr-types.jl")
+include("test-glr-predict.jl")
+include("test-glr-fit.jl")
 
-include("mlfun_loss+penalty.jl")
+include("test-mlfun-loss-penalty.jl")

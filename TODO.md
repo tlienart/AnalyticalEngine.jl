@@ -24,7 +24,10 @@ Feel free to add points, please add a TAG to indicate how hard it is + how urgen
 
 ## Generalized Linear Regression
 
-* with or without intercept, how to avoid copying data? `hcat(ones(n), X)` with intercept seems inefficient?
+* (**think**) with or without intercept, how to avoid copying data? `hcat(ones(n), X)` with intercept seems inefficient?
+* (**think**) loss through "activation function" so for example `|y-f(Xb)|₂` for some f (generalised least square). Bayesian LogReg is sometimes that btw with `f=σ`.
+* (**low priority, easy**) there are a bunch of arguments that appear for multiple short regression like `fit_intercept`, `avgloss` and `avgpenalty`. Maybe good to use `kwargs...` or something.
+* (**think**) api consistency, use `average_loss` instead of `avgloss`? same for penalty.
 
 ### Ridge
 

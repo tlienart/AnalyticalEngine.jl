@@ -4,6 +4,7 @@ export
     LPDistLoss, LPPenalty,
     L1DistLoss, L1Penalty,
     L2DistLoss, L2Penalty,
+    LogisticLoss,
     # Utilities
     isdifferentiable, getp
 
@@ -54,3 +55,10 @@ const LPCost{p} = Union{LPDistLoss{p}, LPPenalty{p}}
 (p::LPPenalty)(θ) = lp(θ, getp(p))
 
 isdifferentiable(lpc::LPCost{P}) where P = (P>1)
+
+"""
+    LogisticLoss <: AtomicLoss
+"""
+struct LogisticLoss <: AtomicLoss end
+
+(::LogisticLoss)(x, y) = -sum(NNlib.logsigmoid, x .* y)

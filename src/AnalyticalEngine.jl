@@ -1,6 +1,13 @@
 module AnalyticalEngine
 
 using Flux.Tracker # Needs version > 0.4.1 (for norm)
+using NNlib
+import Flux.Tracker: @back
+
+logsigmoid(xs::TrackedArray) = track(NNLib.logsigmoid, xs)
+
+back(::typeof(logsigmoid), Δ, xs) = @back(xs, NNLib.∇logsigmoid(Δ, data(xs)))
+
 
 export fit!, predict
 
