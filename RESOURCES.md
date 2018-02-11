@@ -52,6 +52,7 @@ _The current path is to re-implement a significant portion of it as it is a key 
 * [Iteration Managers](https://github.com/sglyon/IterationManagers.jl)
 * [Gaussian processes](https://github.com/cstjean/ScikitLearn.jl/blob/master/examples/Gaussian_Processes_Julia.ipynb)
 * [MLBase](https://github.com/JuliaStats/MLBase.jl)
+* [Bags of little bootstrap](https://gist.github.com/jiahao/7033758)
 
 ## Tree models
 
@@ -64,6 +65,10 @@ _The current path is to re-implement a significant portion of it as it is a key 
 * [Optim](https://github.com/JuliaNLSolvers/Optim.jl)
 * [Stochastic Optim](https://github.com/JuliaML/StochasticOptimization.jl)
 * [Prox](https://github.com/JuliaML/Prox.jl)
+
+### Specific solvers that can be looked into
+
+* [Liblinear](https://github.com/cjlin1/liblinear) used by sklearn
 
 ## Differentiable programs
 

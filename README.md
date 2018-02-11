@@ -7,10 +7,10 @@
 ## Who's behind this
 
 * Thibaut Lienart (Imperial College London)
-* Sebastian Vollmer (University of Warwick, Alan Turing Institute)
 * Mike Innes (Julia Computing)
-* Avik Sengupta (Julia Computing)
+* Sebastian Vollmer (University of Warwick, Alan Turing Institute)
 * Franz Kiraly (University College London)
+* Avik Sengupta (Julia Computing)
 * Valentin Churavy (Massachusetts Institute of Technology)
 
 ## Aims and Milestones
@@ -18,8 +18,8 @@
 ### Milestones
 
 * March 2018
-  - [**working prototype**] have a basic `GeneralizedLinearRegression` that works well and showcases the ideas + works with Flux
-  - have a basic pipeline `JuliaDB -> AnalyticalEngine`
+  - [**working prototype**] ~~have a basic `GeneralizedLinearRegression` that works well and showcases the ideas + works with Flux~~
+  - [**WIP**] have a basic pipeline `JuliaDB -> AnalyticalEngine`
   - have an interface with `DecisionTree.jl`
 * August 2018
   - have a full pipeline `JuliaDB -> FeatEng -> AnalyticalEngine`
@@ -36,3 +36,10 @@
   - offer extensible meta-learning
   - offer modern and extensible hyperparameter tuning (such as Bayesian opt)
   - be extended easily by researchers/users in such a way that the maths matches well with the code
+
+### Inspiration
+
+* [MLR in R](https://github.com/mlr-org/mlr) 
+* [Sklearn in Python](https://github.com/scikit-learn/scikit-learn) as well as [contributions](https://github.com/scikit-learn-contrib) such as [sklearn pandas](https://github.com/scikit-learn-contrib/sklearn-pandas) and [lightning](https://github.com/scikit-learn-contrib/lightning)
+* [Sklearn in Julia](https://github.com/cstjean/ScikitLearn.jl)
+* Caret
