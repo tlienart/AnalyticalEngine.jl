@@ -63,7 +63,7 @@ NOTE will only work if things are differentiable and there it may be better to
 just use analytical gradients (e.g.: logit).
 =#
 function fit_flux(glr, X, y, n, p;
-    grad_step::Union{Void, Function}=nothing, nsteps=10)
+    grad_step::Union{Void, Function}=nothing, nsteps=10, showloss=false)
 
     @assert typeof(grad_step) != Void "You need to specify an update mechanism"
 
@@ -80,8 +80,10 @@ function fit_flux(glr, X, y, n, p;
 
     for i = 1:nsteps
         back!(objfun(X, y))
-        @show objfun(X, y)
         params = grad_step(params, i)
+        if showloss
+            @show objfun(X, y)
+        end
     end
 
     return glr.fit_intercept ? vcat(b.data, θ.data) : θ.data
