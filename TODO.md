@@ -24,10 +24,11 @@ Feel free to add points, please add a TAG to indicate how hard it is + how urgen
 
 ## Generalized Linear Regression
 
-* (**think**) with or without intercept, how to avoid copying data? `hcat(ones(n), X)` with intercept seems inefficient?
-* (**think**) loss through "activation function" so for example `|y-f(Xb)|₂` for some f (generalised least square). Bayesian LogReg is sometimes that btw with `f=σ`.
+* (**medium priority, think**) with or without intercept, how to avoid copying data? `hcat(ones(n), X)` with intercept seems inefficient?
+* (**low priority, think**) loss through "activation function" so for example `|y-f(Xb)|₂` for some f (generalised least square). Bayesian LogReg is sometimes that btw with `f=σ`.
 * (**low priority, easy**) there are a bunch of arguments that appear for multiple short regression like `fit_intercept`, `avgloss` and `avgpenalty`. Maybe good to use `kwargs...` or something.
-* (**think**) api consistency, use `average_loss` instead of `avgloss`? same for penalty.
+* (**low priority, think**) api consistency, use `average_loss` instead of `avgloss`? same for penalty.
+* (**high priority, think**) corresponding to the hierarchy of types there is a hierarchy of solver. Currently we write solvers for specific leaf nodes but we should use generic solvers as backend. This should be expressed neatly in the parent `fit!` which, potentially, should delegate to either specific fit functions `fit_ols`, `fit_ridge`, `fit_lasso`, etc. as well as have generic solver `flux` (needs differentiable stuff), `optim.jl` etc where for example we consider higher order questions like `isdifferentiable` `hasprox` etc.
 
 ### Ridge
 
