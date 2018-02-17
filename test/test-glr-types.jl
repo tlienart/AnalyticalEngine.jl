@@ -39,8 +39,8 @@ set!(lasso3, Dict(:penalty=>2.0*L1Penalty()))
 @test get(lasso3.penalty).scale == 2.0
 
 # TODO ability to change this
-#ridge_from_lasso = deepcopy(lasso)
-#set!(ridge_from_lasso, Dict(:penalty=>2.0*L2Penalty()))
+# ridge_from_lasso = deepcopy(lasso)
+# set!(ridge_from_lasso, Dict(:penalty=>2.0*L2Penalty()))
 
 
 end # testset
