@@ -34,21 +34,19 @@ Specific cases include:
 * **Lasso regression**: L2 loss, L1 penalty
 * **Logit/Probit regression**: Logit/Probit loss, no/L1/L2 penalty
 """
-mutable struct GeneralizedLinearRegression{L<:Loss, P<:Penalty} <: RegressionModel
+mutable struct GeneralizedLinearRegression <: RegressionModel
     # Parameters that can be tuned
-    loss::Base.RefValue{L}              # L(y, ŷ) where ŷ=Xθ
-    penalty::Base.RefValue{P}           # R(θ) contains the scaling
-    fit_intercept::Base.RefValue{Bool}  # add intercept ? def=true
-    avg_loss::Base.RefValue{Bool}       # avg loss ? def=true
+    loss::Loss           # L(y, ŷ) where ŷ=Xθ
+    penalty::Penalty     # R(θ) contains the scaling
+    fit_intercept::Bool  # add intercept ? def=true
+    avg_loss::Bool       # avg loss ? def=true
     # Fitted quantities
     n_features::Union{Void, Int}
     intercept::Union{Void, Real}
     coefs::Union{Void, AbstractVector{Real}}
 end
 
-# short alias
-const GLR{L, P} = GeneralizedLinearRegression{L, P}
-
+const GLR = GeneralizedLinearRegression
 
 # constructor
 function GeneralizedLinearRegression(;
@@ -58,10 +56,10 @@ function GeneralizedLinearRegression(;
     avg_loss=true)
 
     GeneralizedLinearRegression(
-        Ref(loss),
-        Ref(penalty),
-        Ref(fit_intercept),
-        Ref(avg_loss),
+        loss,
+        penalty,
+        fit_intercept,
+        avg_loss,
         nothing,        # un-assigned number of features
         nothing,        # un-assigned intercept
         nothing)        # un-assigned coefficients
@@ -69,18 +67,13 @@ end
 
 
 # function that returns symbols corresponding to hyperparameters
-hyperparameters(glr::GLR) = Dict{Symbol, Ref}(
-	:loss=>glr.loss,
-	:penalty=>glr.penalty,
-    :fit_intercept=>glr.fit_intercept,
-    :avg_loss=>glr.avg_loss)
-
+hyperparameters(glr::GLR) =
+    (:loss, :penalty, :fit_intercept, :avg_loss)
 
 # function to copy a GLR object
-deepcopy(glr::GLR) = GeneralizedLinearRegression(
+copy(glr::GLR) = GeneralizedLinearRegression(
     map(deepcopy, (glr.loss, glr.penalty, glr.fit_intercept, glr.avg_loss,
                    glr.n_features, glr.intercept, glr.coefs))...)
-
 
 #= ---------------------------------------------------------------------------
 CONSTRUCTORS FOR STANDARD GLR MODELS
@@ -146,7 +139,7 @@ end
 """
 function LogisticRegression(λ::Real=1.0;
     loss=LogisticLoss(),
-    penalty::Union{NoPenalty, LPPenalty{1}, LPPenalty{2}}=L2Penalty(),
+    penalty::Union{NoPenalty, L1Penalty, L2Penalty}=L2Penalty(),
     fit_intercept::Bool=true,
     avg_loss::Bool=false) # it's usually not the averaged loss that's used
 
