@@ -53,8 +53,8 @@ fit!(ols_flux, X, y,
     solver="Flux", grad_step=basic_gd(), nsteps=50)
 
 @test isapprox(
-    get(ols.loss)(ols(X), y),
-    get(ols.loss)(ols_flux(X), y),
+    ols.loss(ols(X), y),
+    ols.loss(ols_flux(X), y),
     atol=1e-4)
 
 #=
@@ -79,8 +79,8 @@ fit!(ridge_flux, X, y,
 
 # for this one, Flux converges to pretty much exactly the analytical solution
 @test isapprox(
-    get(ridge.loss)(ridge(X), y)/n + get(ridge.penalty)(ridge.coefs),
-    get(ridge.loss)(ridge_flux(X), y)/n + get(ridge.penalty)(ridge_flux.coefs),
+    ridge.loss(ridge(X), y) / n + ridge.penalty(ridge.coefs),
+    ridge.loss(ridge_flux(X), y) / n + ridge.penalty(ridge_flux.coefs),
     atol=1e-12)
 
 #=

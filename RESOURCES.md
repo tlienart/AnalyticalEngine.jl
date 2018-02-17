@@ -9,7 +9,6 @@
 * ? feature engineering
 * ? stacking
 * ? NLP
-* ? gradient boosting
 * ? cross validation (and variants)
 
 ## Data processing
@@ -54,6 +53,7 @@ _The current path is to re-implement a significant portion of it as it is a key 
 * [MLBase](https://github.com/JuliaStats/MLBase.jl)
 * [Bags of little bootstrap](https://gist.github.com/jiahao/7033758)
 * [Orchestra.jl (ensembles)](https://github.com/svs14/Orchestra.jl) now defunct
+* [GradientBoost.jl](https://github.com/svs14/GradientBoost.jl) now defunct
 
 ## Tree models
 
