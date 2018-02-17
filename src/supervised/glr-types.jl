@@ -23,45 +23,71 @@ export
 
 Generalized Linear Regression (GLR) model with objective function:
 
-``L(y, f(Xθ)) + λ P(θ)``
+``L(y, Xθ) + λ P(θ)``
 
-where ``L`` is a loss function, ``P`` a penalty and ``f`` is a function.
+where ``L`` is a loss function and ``P`` a penalty.
 
 Specific cases include:
 
-* **OLS regression**: L2 loss, no penalty, identity ``f``
-* **Ridge regression**: L2 loss, L2 penalty, identity ``f``
-* **Lasso regression**: L2 loss, L1 penalty, identity ``f``
-* **Logit/Probit regression**: L2 Loss, no/L1/L2 penalty, logit/probit ``f``
+* **OLS regression**: L2 loss, no penalty
+* **Ridge regression**: L2 loss, L2 penalty
+* **Lasso regression**: L2 loss, L1 penalty
+* **Logit/Probit regression**: Logit/Probit loss, no/L1/L2 penalty
 """
 mutable struct GeneralizedLinearRegression{L<:Loss, P<:Penalty} <: RegressionModel
-    loss::L     # L(y, ŷ) where ŷ=Xθ
-    penalty::P  # R(θ) contains the scaling
-    fit_intercept::Bool
-    n_features::Int
-    intercept::Real
-    coefs::AbstractVector{Real}
-    avgloss::Bool    # whether to use the averaged loss (def=true)
+    # Parameters that can be tuned
+    loss::Base.RefValue{L}              # L(y, ŷ) where ŷ=Xθ
+    penalty::Base.RefValue{P}           # R(θ) contains the scaling
+    fit_intercept::Base.RefValue{Bool}  # add intercept ? def=true
+    avg_loss::Base.RefValue{Bool}       # avg loss ? def=true
+    # Fitted quantities
+    n_features::Union{Void, Int}
+    intercept::Union{Void, Real}
+    coefs::Union{Void, AbstractVector{Real}}
 end
 
 # short alias
 const GLR{L, P} = GeneralizedLinearRegression{L, P}
 
+
+# constructor
 function GeneralizedLinearRegression(;
     loss=L2DistLoss(),
     penalty=NoPenalty(),
     fit_intercept=true,
-    avgloss::Bool=true)
+    avg_loss=true)
 
     GeneralizedLinearRegression(
-        loss,
-        penalty,
-        fit_intercept,
-        zero(Int64),       # un-assigned number of features
-        zero(Real),        # un-assigned intercept
-        zeros(Real, 0),    # un-assigned coefficients
-        avgloss)           # average the loss by number of data points
+        Ref(loss),
+        Ref(penalty),
+        Ref(fit_intercept),
+        Ref(avg_loss),
+        nothing,        # un-assigned number of features
+        nothing,        # un-assigned intercept
+        nothing)        # un-assigned coefficients
 end
+
+
+# function that returns symbols corresponding to hyperparameters
+hyperparameters(glr::GLR) = Dict{Symbol, Ref}(
+	:loss=>glr.loss,
+	:penalty=>glr.penalty,
+    :fit_intercept=>glr.fit_intercept,
+    :avg_loss=>glr.avg_loss)
+
+
+# function to copy a GLR object
+deepcopy(glr::GLR) = GeneralizedLinearRegression(
+    map(deepcopy, (glr.loss, glr.penalty, glr.fit_intercept, glr.avg_loss,
+                   glr.n_features, glr.intercept, glr.coefs))...)
+
+
+#= ---------------------------------------------------------------------------
+CONSTRUCTORS FOR STANDARD GLR MODELS
+* OLS regression
+* RIDGE regression
+* LASSO regression
+--------------------------------------------------------------------------- =#
 
 """
     LinearRegression
@@ -72,7 +98,7 @@ Generalized Linear Regression model with objective function
 """
 function LinearRegression(;
     fit_intercept::Bool=true,
-    avgloss::Bool=true)
+    avg_loss::Bool=true)
 
     GeneralizedLinearRegression(
         fit_intercept=fit_intercept)
@@ -88,12 +114,12 @@ Generalized Linear Regression model with objective function
 """
 function RidgeRegression(λ::Real=1.0;
     fit_intercept::Bool=true,
-    avgloss::Bool=true)
+    avg_loss::Bool=true)
 
     GeneralizedLinearRegression(
-        penalty=λ * L2Penalty(),
+        penalty=L2Penalty() * λ,
         fit_intercept=fit_intercept,
-        avgloss=avgloss)
+        avg_loss=avg_loss)
 end
 
 
@@ -106,12 +132,12 @@ Generalized Linear Regression model with objective function
 """
 function LassoRegression(λ::Real=1.0;
     fit_intercept::Bool=true,
-    avgloss::Bool=true)
+    avg_loss::Bool=true)
 
     GeneralizedLinearRegression(
-        penalty=λ * L1Penalty(),
+        penalty=L1Penalty() * λ,
         fit_intercept=fit_intercept,
-        avgloss=avgloss)
+        avg_loss=avg_loss)
 end
 
 
@@ -120,13 +146,13 @@ end
 """
 function LogisticRegression(λ::Real=1.0;
     loss=LogisticLoss(),
-    penalty::Union{NoPenalty, L1Penalty, L2Penalty}=L2Penalty(),
+    penalty::Union{NoPenalty, LPPenalty{1}, LPPenalty{2}}=L2Penalty(),
     fit_intercept::Bool=true,
-    avgloss::Bool=false) # it's usually not the averaged loss that's used
+    avg_loss::Bool=false) # it's usually not the averaged loss that's used
 
     GeneralizedLinearRegression(
         loss=loss,
-        penalty=λ * penalty,
+        penalty=penalty * λ,
         fit_intercept=fit_intercept,
-        avgloss=avgloss)
+        avg_loss=avg_loss)
 end
