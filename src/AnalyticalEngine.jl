@@ -11,13 +11,10 @@ logsigmoid(xs::TrackedArray) = track(logsigmoid, xs)
 back(::typeof(logsigmoid), Δ, xs) = @back(xs, ∇logsigmoid(Δ, data(xs)))
 # -----------------------------------------------------------------------------
 
-import Base.deepcopy
-
 export
        # these functions should be implemented for all M <: SupervisedModel
        fit!, predict, score,
-       set!, set, deepcopy,
-       hyperparameters
+       set!, set, hyperparameters
 
 struct UnimplementedException <: Exception end
 

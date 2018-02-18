@@ -50,5 +50,6 @@ ridge_from_lasso = deepcopy(lasso)
 set!(ridge_from_lasso, penalty=L2Penalty())
 
 @test isa(ridge_from_lasso.penalty, L2Penalty)
+@test isa(lasso.penalty, ScaledPenalty{L1Penalty})
 
 end # testset

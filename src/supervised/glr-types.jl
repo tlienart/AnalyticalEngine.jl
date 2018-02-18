@@ -70,10 +70,6 @@ end
 hyperparameters(glr::GLR) =
     (:loss, :penalty, :fit_intercept, :avg_loss)
 
-# function to copy a GLR object
-copy(glr::GLR) = GeneralizedLinearRegression(
-    map(deepcopy, (glr.loss, glr.penalty, glr.fit_intercept, glr.avg_loss,
-                   glr.n_features, glr.intercept, glr.coefs))...)
 
 #= ---------------------------------------------------------------------------
 CONSTRUCTORS FOR STANDARD GLR MODELS
