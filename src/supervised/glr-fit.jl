@@ -11,12 +11,17 @@ function fit!(glr::GLR, X::AbstractArray{S}, y::AbstractVector{T};
     glr.n_features = p
     solver = lowercase(solver)
 
+    # retrieve loss and penalty, deal accordingly
+    loss = glr.loss
+    # all models expect a ScaledPenalty -> add scale.
+    penalty = isa(glr.penalty, AtomicPenalty) ? 1*glr.penalty : glr.penalty
+
     if solver == "flux"
         # generic solver for differentiable programs
-        β = fit_flux(glr, X, y, n, p; kwargs...)
+        β = fit_flux(loss, penalty, glr, X, y, n, p; kwargs...)
     else
         # specific solvers for different sub-cases
-        β = fit_(glr.loss, glr.penalty, glr, X, y, n, p, solver; kwargs...)
+        β = fit_(loss, penalty, glr, X, y, n, p, solver; kwargs...)
     end
 
     glr.intercept, glr.coefs = glr.fit_intercept ? (β[1], β[2:end]) : (0, β)
@@ -27,7 +32,7 @@ end
 #=
 OLS  regression
 =#
-function fit_(::L2DistLoss, ::NoPenalty, glr::GLR,
+function fit_(::L2DistLoss, ::ScaledPenalty{NoPenalty}, glr::GLR,
     X, y, n, p, solver)
 
     if solver ∈ ["default", "analytical"]
@@ -68,7 +73,7 @@ Generalized Linear Regression with FLUX
 NOTE will only work if things are differentiable and there it may be better to
 just use analytical gradients (e.g.: logit).
 =#
-function fit_flux(glr, X, y, n, p;
+function fit_flux(loss, penalty, glr, X, y, n, p;
     grad_step::Union{Void, Function}=nothing, nsteps=10, showscore=false)
 
     @assert grad_step != nothing "You need to specify an update mechanism"
@@ -81,7 +86,7 @@ function fit_flux(glr, X, y, n, p;
     scale_loss = glr.avg_loss ? length(y) : 1
 
     predict(X) = glr.fit_intercept ? (X * θ .+ b) : (X * θ)
-    score(X, y) = glr.loss(predict(X), y) / scale_loss + glr.penalty(θ)
+    score(X, y) = loss(predict(X), y) / scale_loss + penalty(θ)
 
     for i = 1:nsteps
         back!(score(X, y))

@@ -1,5 +1,8 @@
-lp(v, p) = (p==Inf) ? maximum(v) : (
-             (p==2) ? sum(abs2.(v)) : (
-               (p>0) ? sum(abs.(v).^p) : throw(DomainError())))
+function lp(v, p)
+    (p==Inf) && return maximum(v)
+    (p==2) && return sum(abs2.(v))
+    (p>0) && return sum(abs.(v).^p)
+    throw(DomainError())
+end
 
 getp(lpc::LPCost{P}) where P = P
