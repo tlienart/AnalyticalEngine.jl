@@ -21,10 +21,15 @@
   - [**working prototype**] ~~have a basic `GeneralizedLinearRegression` that works well and showcases the ideas + works with Flux~~
   - [**WIP**] have a basic pipeline `JuliaDB -> AnalyticalEngine`
   - have an interface with `DecisionTree.jl`
+  - [**WIP**] have a way to deal with hyperparameters that works well with meta-learning
 * August 2018
   - have a full pipeline `JuliaDB -> FeatEng -> AnalyticalEngine`
   - have a working framework for metalearning
   - have working tools for hyperparameter tuning (BayesianOpt, K-Folds, ...)
+* Longer term
+  - In the spirit of [MLR](https://github.com/mlr-org/mrl) we'd like to interface with as many dedicated packages ("solvers") as possible and promote the creation and maintenance of those. 
+    - In a first phase we won't care too much about this, focusing on the general pipeline, hyperparameter management etc but eventually this will become the key focus once we have a strong central API.
+    - There are a ton of packages implementing / re-implementing specific capabilities, hopefully the API will lead to the merging / concentration of packages solving generic tasks efficiently
 
 ### Aims
 
