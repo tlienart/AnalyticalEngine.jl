@@ -38,12 +38,19 @@ _The current path is to re-implement a significant portion of it as it is a key 
 * [Regression](https://github.com/lindahua/Regression.jl)
 * [GLM](https://github.com/JuliaStats/GLM.jl)
 * [SparseRegression](https://github.com/joshday/SparseRegression.jl)
+* [Parallel Sparse Regression with ADMM](https://github.com/madeleineudell/ParallelSparseRegression.jl) now defunct
+* [Linear Least Squares](https://github.com/davidlizeng/LinearLeastSquares.jl) now seems defunct
+* [LsqFit](https://github.com/JuliaNLSolvers/LsqFit.jl)
 
 ## Classification
 
 * [SVM](https://github.com/JuliaStats/SVM.jl)
 * [LIBSVM](https://github.com/mpastell/LIBSVM.jl)
 * [KSVM](https://github.com/Evizero/KSVM.jl)
+
+## Low Rank Models
+
+* [Low Rank Models](https://github.com/madeleineudell/LowRankModels.jl)
 
 ## Meta
 
