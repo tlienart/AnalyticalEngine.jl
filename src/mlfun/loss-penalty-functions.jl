@@ -16,10 +16,16 @@ export
 """
 struct NoLoss <: AtomicLoss end
 
+*(nl::NoLoss, c::Real) = NoLoss()
+*(c::Real, nl::NoLoss) = NoLoss()
+
 """
     NoPenalty <: AtomicPenalty
 """
 struct NoPenalty <: AtomicPenalty end
+
+*(nl::NoPenalty, c::Real) = NoPenalty()
+*(c::Real, nl::NoPenalty) = NoPenalty()
 
 ## Useful shortcut
 

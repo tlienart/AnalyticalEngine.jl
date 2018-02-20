@@ -43,8 +43,8 @@ p2 = L2Penalty()
 TESTING SCALING AND COMPOSITION OF LOSS AND PENALTY FUNCTIONS
 =#
 
-lc = l2 - l1
-pc = p1 + p2
+lc = l2 - l1 + noloss
+pc = p1 + p2 - nopenalty
 
 @test (2l2)(x, y) ≈ 2δ2
 @test (l2+l1)(x, y) ≈ δ2 + δ1
