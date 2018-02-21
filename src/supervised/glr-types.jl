@@ -36,8 +36,8 @@ Specific cases include:
 """
 mutable struct GeneralizedLinearRegression <: RegressionModel
     # Parameters that can be tuned
-    loss::Loss           # L(y, ŷ) where ŷ=Xθ
-    penalty::Penalty     # R(θ) contains the scaling
+    loss::Union{NoLoss, ScaledLoss, CompositeLoss} # L(y, ŷ=Xθ)
+    penalty::Union{NoPenalty, ScaledPenalty, CompositePenalty} # R(θ)
     fit_intercept::Bool  # add intercept ? def=true
     avg_loss::Bool       # avg loss ? def=true
     # Fitted quantities
