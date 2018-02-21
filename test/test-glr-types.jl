@@ -10,19 +10,19 @@ lasso = LassoRegression()
 logreg = LogisticRegression()
 
 @test isa(glr, RegressionModel)
-@test isa(glr.loss, L2DistLoss)
+@test isa(glr.loss, ScaledLoss{L2DistLoss})
 @test isa(glr.penalty, NoPenalty)
 
-@test isa(ols.loss, L2DistLoss)
+@test isa(ols.loss, ScaledLoss{L2DistLoss})
 @test isa(ols.penalty, NoPenalty)
 
-@test isa(ridge.loss, L2DistLoss)
+@test isa(ridge.loss, ScaledLoss{L2DistLoss})
 @test isa(ridge.penalty, ScaledPenalty{L2Penalty})
 
-@test isa(lasso.loss, L2DistLoss)
+@test isa(lasso.loss, ScaledLoss{L2DistLoss})
 @test isa(lasso.penalty, ScaledPenalty{L1Penalty})
 
-@test isa(logreg.loss, LogisticLoss)
+@test isa(logreg.loss, ScaledLoss{LogisticLoss})
 @test isa(logreg.penalty, ScaledPenalty{L2Penalty})
 
 # GLR hyperparameters, set!, set and deepcopy
@@ -49,7 +49,7 @@ set!(lasso3, penalty=2.0*L1Penalty())
 ridge_from_lasso = deepcopy(lasso)
 set!(ridge_from_lasso, penalty=L2Penalty())
 
-@test isa(ridge_from_lasso.penalty, L2Penalty)
+@test isa(ridge_from_lasso.penalty, ScaledPenalty{L2Penalty})
 @test isa(lasso.penalty, ScaledPenalty{L1Penalty})
 
 end # testset

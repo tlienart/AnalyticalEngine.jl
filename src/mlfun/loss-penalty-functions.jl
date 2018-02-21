@@ -1,6 +1,5 @@
 export
     # Loss / Penalty types
-    NoLoss, NoPenalty,
     LPDistLoss, LPPenalty,
     L1DistLoss, L1Penalty,
     L2DistLoss, L2Penalty,
@@ -8,22 +7,7 @@ export
     # Utilities
     isdifferentiable, getp
 
-# ============================
-## None based loss and penalty
-# ============================
-"""
-    NoLoss <: AtomicLoss
-"""
-struct NoLoss <: AtomicLoss end
-
-"""
-    NoPenalty <: AtomicPenalty
-"""
-struct NoPenalty <: AtomicPenalty end
-
-## Useful shortcut
-
-const NoCost = Union{NoLoss, NoPenalty}
+## NoLoss / NoPenalty properties
 
 (l::NoLoss)(x, y) = 0
 (p::NoPenalty)(θ) = 0

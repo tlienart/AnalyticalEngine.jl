@@ -13,8 +13,7 @@ function fit!(glr::GLR, X::AbstractArray{S}, y::AbstractVector{T};
 
     # retrieve loss and penalty, deal accordingly
     loss = glr.loss
-    # all models expect a ScaledPenalty -> add scale.
-    penalty = isa(glr.penalty, AtomicPenalty) ? 1*glr.penalty : glr.penalty
+    penalty = glr.penalty
 
     if solver == "flux"
         # generic solver for differentiable programs
@@ -32,8 +31,8 @@ end
 #=
 OLS  regression
 =#
-function fit_(::L2DistLoss, ::ScaledPenalty{NoPenalty}, glr::GLR,
-    X, y, n, p, solver)
+function fit_(::ScaledLoss{L2DistLoss}, ::NoPenalty,
+    glr, X, y, n, p, solver)
 
     if solver ∈ ["default", "analytical"]
         # XXX this is potentially very inefficient
@@ -49,15 +48,15 @@ end
 #=
 Ridge regression
 =#
-function fit_(::L2DistLoss, ::ScaledPenalty{L2Penalty}, glr::GLR,
-    X, y, n, p, solver)
+function fit_(::ScaledLoss{L2DistLoss}, penalty::ScaledPenalty{L2Penalty},
+    glr, X, y, n, p, solver)
 
     if solver ∈ ["default", "analytical"]
         # XXX this is potentially very inefficient
         X_, p_ = glr.fit_intercept ? (hcat(ones(n), X), p+1) : (X, p)
         # depending on avgloss/avgpenalty, the objective function should take
         # n and p into account which all amounts to changing λ
-        σ_gap = glr.penalty.scale
+        σ_gap = penalty.scale
         σ_gap *= (glr.avg_loss ? n : 1)
         β = (X_' * X_ + σ_gap * eye(p_)) \ (X_' * y)
     else
