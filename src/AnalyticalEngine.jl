@@ -3,7 +3,7 @@ module AnalyticalEngine
 # -----------------------------------------------------------------------------
 # Extension to Flux and NNLib. These should eventually be integrated in those
 # libraries by @mikeinnes
-using Flux: back!, param
+using Flux: back!, param, logsigmoid
 using Flux.Tracker: @back
 
 export
