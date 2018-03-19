@@ -5,4 +5,4 @@ function lp(v, p)
     throw(DomainError())
 end
 
-getp(lpc::LPCost{P}) where P = P
+getp(lpc::LPCost{p}) where p = p

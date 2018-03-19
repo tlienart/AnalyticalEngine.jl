@@ -1,4 +1,4 @@
-function predict(glr::GLR, X::AbstractArray{T}) where T<:Real
+function predict(glr::GLR, X::AbstractArray{<:Real})
 
     is_fitted = !any((glr.n_features, glr.intercept, glr.coefs) .== nothing)
     @assert is_fitted "Model was not fitted"

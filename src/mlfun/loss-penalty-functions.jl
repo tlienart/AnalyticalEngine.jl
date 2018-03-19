@@ -38,7 +38,7 @@ const LPCost{p} = Union{LPDistLoss{p}, LPPenalty{p}}
 (l::LPDistLoss)(x, y) = lp(x .- y, getp(l))
 (p::LPPenalty)(θ) = lp(θ, getp(p))
 
-isdifferentiable(lpc::LPCost{P}) where P = (P>1)
+isdifferentiable(lpc::LPCost{p}) where p = (p > 1)
 
 """
     LogisticLoss <: AtomicLoss

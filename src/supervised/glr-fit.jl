@@ -3,8 +3,8 @@
 
 Parent call to fit a `GeneralizedLinearRegression` model.
 """
-function fit!(glr::GLR, X::AbstractArray{S}, y::AbstractVector{T};
-    solver::String="default", kwargs...) where {S <: Real, T <: Real}
+function fit!(glr::GLR, X::AbstractArray{<:Real}, y::AbstractVector{<:Real};
+    solver::String="default", kwargs...)
 
     # retrieve the number of instances + features and solver description
     n, p = size(X)
@@ -30,6 +30,9 @@ end
 
 #=
 OLS  regression
+
+Loss: L2Loss
+Penalty: NoPenalty
 =#
 function fit_(::ScaledLoss{L2DistLoss}, ::NoPenalty,
     glr, X, y, n, p, solver)
@@ -47,6 +50,9 @@ end
 
 #=
 Ridge regression
+
+Loss: L2Loss
+Penalty: L2Penalty
 =#
 function fit_(::ScaledLoss{L2DistLoss}, penalty::ScaledPenalty{L2Penalty},
     glr, X, y, n, p, solver)
