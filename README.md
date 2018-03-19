@@ -7,9 +7,10 @@
 ## Who's behind this
 
 * Thibaut Lienart (Imperial College London)
-* Mike Innes (Julia Computing)
+* Miguel Morin (Alan Turing Institute)
 * Sebastian Vollmer (University of Warwick, Alan Turing Institute)
 * Franz Kiraly (University College London)
+* Mike Innes (Julia Computing)
 * Avik Sengupta (Julia Computing)
 * Valentin Churavy (Massachusetts Institute of Technology)
 
@@ -27,7 +28,7 @@
   - have a working framework for metalearning
   - have working tools for hyperparameter tuning (BayesianOpt, K-Folds, ...)
 * Longer term
-  - In the spirit of [MLR](https://github.com/mlr-org/mrl) we'd like to interface with as many dedicated packages ("solvers") as possible and promote the creation and maintenance of those. 
+  - In the spirit of [MLR](https://github.com/mlr-org/mrl) we'd like to interface with as many dedicated packages ("solvers") as possible and promote the creation and maintenance of those.
     - In a first phase we won't care too much about this, focusing on the general pipeline, hyperparameter management etc but eventually this will become the key focus once we have a strong central API.
     - There are a ton of packages implementing / re-implementing specific capabilities, hopefully the API will lead to the merging / concentration of packages solving generic tasks efficiently
 
@@ -44,7 +45,7 @@
 
 ### Inspiration
 
-* [MLR in R](https://github.com/mlr-org/mlr) 
+* [MLR in R](https://github.com/mlr-org/mlr)
 * [Sklearn in Python](https://github.com/scikit-learn/scikit-learn) as well as [contributions](https://github.com/scikit-learn-contrib) such as [sklearn pandas](https://github.com/scikit-learn-contrib/sklearn-pandas) and [lightning](https://github.com/scikit-learn-contrib/lightning)
 * [Sklearn in Julia](https://github.com/cstjean/ScikitLearn.jl)
 * Caret
