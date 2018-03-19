@@ -3,13 +3,8 @@ module AnalyticalEngine
 # -----------------------------------------------------------------------------
 # Extension to Flux and NNLib. These should eventually be integrated in those
 # libraries by @mikeinnes
-using Flux.Tracker
-using NNlib
-import Flux.Tracker: @back
-import NNlib: logsigmoid, ∇logsigmoid
-logsigmoid(xs::TrackedArray) = track(logsigmoid, xs)
-back(::typeof(logsigmoid), Δ, xs) = @back(xs, ∇logsigmoid(Δ, data(xs)))
-# -----------------------------------------------------------------------------
+using Flux: back!, param
+using Flux.Tracker: @back
 
 export
        # these functions should be implemented for all M <: SupervisedModel
