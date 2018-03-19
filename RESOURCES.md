@@ -2,9 +2,18 @@
 
 **Todo**: add status banner from actual repo + (if poss) num of stars, maybe table of the whole thing.
 
+## Existing Libraries
+
+* [H2O](https://github.com/h2oai/h2o-3)
+* [MLR](https://github.com/mlr-org/mrl)
+* [SkLearn](https://github.com/scikit-learn/scikit-learn)
+
+### Benchmarks
+
+* [benchm-ml](https://github.com/szilard/benchm-ml) and [GMB-perf](https://github.com/szilard/GBM-perf) that shows that LightGBM is now the best tool in town
+
 ## TO FIND
 
-* ? kNN
 * ? clustering
 * ? feature engineering
 * ? stacking
@@ -44,6 +53,7 @@ _The current path is to re-implement a significant portion of it as it is a key 
 
 ## Classification
 
+* [kNN](https://github.com/johnmyleswhite/kNN.jl)
 * [SVM](https://github.com/JuliaStats/SVM.jl)
 * [LIBSVM](https://github.com/mpastell/LIBSVM.jl)
 * [KSVM](https://github.com/Evizero/KSVM.jl)
@@ -65,6 +75,7 @@ _The current path is to re-implement a significant portion of it as it is a key 
 ## Tree models
 
 * [DecisionTree](https://github.com/bensadeghi/DecisionTree.jl)
+    * [Google PLANET model](http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/36296.pdf)
 * [XGBoost](https://github.com/dmlc/XGBoost.jl)
 * [LightGBM](https://github.com/Allardvm/LightGBM.jl)
 

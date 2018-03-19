@@ -55,8 +55,7 @@ function GeneralizedLinearRegression(;
     fit_intercept=true,
     avg_loss=true)
 
-    GeneralizedLinearRegression(
-        loss,
+    GLR(loss,
         penalty,
         fit_intercept,
         avg_loss,
@@ -66,7 +65,6 @@ function GeneralizedLinearRegression(;
 end
 
 
-# function that returns symbols corresponding to hyperparameters
 hyperparameters(glr::GLR) =
     (:loss, :penalty, :fit_intercept, :avg_loss)
 

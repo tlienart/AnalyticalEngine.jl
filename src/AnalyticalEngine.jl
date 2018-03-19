@@ -1,5 +1,7 @@
 module AnalyticalEngine
 
+using DecisionTree
+
 # -----------------------------------------------------------------------------
 # Extension to Flux and NNLib. These should eventually be integrated in those
 # libraries by @mikeinnes
@@ -36,6 +38,9 @@ include("supervised/glr-types.jl")
 include("supervised/glr-utils.jl")
 include("supervised/glr-fit.jl")
 include("supervised/glr-predict.jl")
+
+#### trees
+
 
 
 
