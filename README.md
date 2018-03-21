@@ -4,16 +4,6 @@
 
 [![codecov.io](http://codecov.io/github/tlienart/AnalyticalEngine.jl/coverage.svg?branch=master)](http://codecov.io/github/tlienart/AnalyticalEngine.jl?branch=master)
 
-## Who's behind this
-
-* Thibaut Lienart (Imperial College London)
-* Miguel Morin (Alan Turing Institute)
-* Sebastian Vollmer (University of Warwick, Alan Turing Institute)
-* Franz Kiraly (University College London)
-* Mike Innes (Julia Computing)
-* Avik Sengupta (Julia Computing)
-* Valentin Churavy (Massachusetts Institute of Technology)
-
 ## Aims and Milestones
 
 ### Milestones
@@ -49,3 +39,23 @@
 * [Sklearn in Python](https://github.com/scikit-learn/scikit-learn) as well as [contributions](https://github.com/scikit-learn-contrib) such as [sklearn pandas](https://github.com/scikit-learn-contrib/sklearn-pandas) and [lightning](https://github.com/scikit-learn-contrib/lightning)
 * [Sklearn in Julia](https://github.com/cstjean/ScikitLearn.jl)
 * Caret
+
+## Quick examples
+
+### Simple Linear Regression
+
+```julia
+using AnalyticalEngine
+import RDatasets: dataset
+
+boston = dataset("MASS", "boston")
+y = convert(Array, boston[:MedV])
+X = convert(Array, boston[[:LStat, :PTRatio, :Dis]])
+
+lr = LinearRegression()
+fit!(lr, X, y)
+
+RSS = sum((y - predict(lr, X)).^2)
+TSS = sum((y-mean(y)).^2)
+R2 = 1 - RSS/TSS # ~0.63
+```

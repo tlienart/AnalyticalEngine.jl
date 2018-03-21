@@ -11,6 +11,11 @@
 * ? NLP
 * ? cross validation (and variants)
 
+## General
+
+* [Deviations in StatsBase](https://github.com/JuliaStats/StatsBase.jl/blob/9f1d7aafa86f8771a995b54de1e2432c6e9f55a0/src/deviation.jl)
+* [CrossVal + grid search in MLBase](https://github.com/JuliaStats/MLBase.jl)
+
 ## Data processing
 
 * [JuliaDB](https://github.com/JuliaComputing/JuliaDB.jl)
