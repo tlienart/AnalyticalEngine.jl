@@ -25,6 +25,7 @@
 * [LabelUtils](https://github.com/JuliaML/MLLabelUtils.jl)
 * [Preprocessing](https://github.com/JuliaML/MLPreprocessing.jl)
 * [Transformations](https://github.com/JuliaML/Transformations.jl)
+* [VTREAT](https://cran.r-project.org/web/packages/vtreat/index.html) R tool to manipulate datasets before common ML
 
 ### Datasets
 
