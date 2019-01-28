@@ -1,4 +1,7 @@
-# AnalyticalEngine
+# [DEPRECATED] AnalyticalEngine
+
+/!\ This package is deprecated in favour of [MLJ](https://github.com/alan-turing-institute/MLJ.jl).
+
 
 [![Build Status](https://travis-ci.org/tlienart/AnalyticalEngine.jl.svg?branch=master)](https://travis-ci.org/tlienart/AnalyticalEngine.jl)
 
